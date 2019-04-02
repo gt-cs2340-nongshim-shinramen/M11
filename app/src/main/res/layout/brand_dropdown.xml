@@ -1,0 +1,11 @@
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:id="@+id/brand_main"
+    android:singleLine="true"
+    android:textStyle="bold"
+    android:text="At res"
+    android:textColor="#FFEB3B"
+    android:textSize="15sp"
+    android:gravity="center_horizontal" />

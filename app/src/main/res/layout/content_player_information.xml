@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_dark"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.m6.views.player_information"
+    tools:showIn="@layout/activity_player_information">
+
+    <Button
+        android:id="@+id/button_market_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="13dp"
+        android:text="Market Information"
+        app:layout_constraintStart_toStartOf="@+id/current_planet"
+        app:layout_constraintTop_toBottomOf="@+id/curr_planet" />
+
+    <Button
+        android:id="@+id/button_spaceship_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:text="details"
+        app:layout_constraintBaseline_toBaselineOf="@+id/button_spaceship_refuel"
+        app:layout_constraintEnd_toStartOf="@+id/spaceship_fuel" />
+
+    <Button
+        android:id="@+id/button_spaceship_refuel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="58dp"
+        android:text="refuel"
+        app:layout_constraintBottom_toTopOf="@+id/skill_table"
+        app:layout_constraintStart_toStartOf="@+id/spaceship_fuel" />
+
+    <TableLayout
+        android:id="@+id/skill_table"
+        android:layout_width="0dp"
+        android:layout_height="124dp"
+        android:layout_marginStart="77dp"
+        android:layout_marginTop="368dp"
+        android:layout_marginEnd="77dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </TableLayout>
+
+    <TextView
+        android:id="@+id/player"
+        android:layout_width="100dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="1dp"
+        android:text="Player Name:"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/player_name"
+        app:layout_constraintEnd_toStartOf="@+id/player_name"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/player_name"
+        android:layout_width="0dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="29dp"
+        android:layout_marginBottom="26dp"
+        android:text="Name"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/current_planet"
+        app:layout_constraintStart_toEndOf="@+id/player"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/current_planet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="73dp"
+        android:layout_marginEnd="9dp"
+        android:text="Current Planet:"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/curr_planet"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/curr_planet"
+        android:layout_width="122dp"
+        android:layout_height="35dp"
+        android:text="Current Planet"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/current_planet"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/current_planet" />
+
+    <TextView
+        android:id="@+id/player_credits"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="144dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="16dp"
+        android:text="Credits"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/spaceship_fuel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_market_info"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/credits"
+        android:layout_width="63dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="54dp"
+        android:layout_marginBottom="22dp"
+        android:text="Credits:"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/fuel"
+        app:layout_constraintEnd_toStartOf="@+id/player_credits"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_market_info" />
+
+    <TextView
+        android:id="@+id/fuel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Fuel:"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/button_spaceship_details"
+        app:layout_constraintStart_toStartOf="@+id/credits" />
+
+    <TextView
+        android:id="@+id/spaceship_fuel"
+        android:layout_width="122dp"
+        android:layout_height="0dp"
+        android:text="Fuel"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/button_spaceship_refuel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fuel" />
+
+    <Button
+        android:id="@+id/button_warp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Let's Fly"
+        app:layout_constraintBaseline_toBaselineOf="@+id/button_menu"
+        app:layout_constraintStart_toStartOf="@+id/skill_table" />
+
+    <Button
+        android:id="@+id/button_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="40dp"
+        android:text="Menu"
+        app:layout_constraintStart_toEndOf="@+id/button_warp"
+        app:layout_constraintTop_toBottomOf="@+id/skill_table" />
+
+</android.support.constraint.ConstraintLayout>
