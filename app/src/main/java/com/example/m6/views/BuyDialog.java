@@ -34,7 +34,7 @@ public class BuyDialog extends AppCompatDialogFragment {
         try{
             call = (BuyDialogListener) activity;
         } catch(ClassCastException e) {
-            Log.d("test", "activity doesnt implement");
+            Log.d("test", "activity doesn't implement");
         }
     }
 

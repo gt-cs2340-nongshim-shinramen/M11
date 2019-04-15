@@ -68,7 +68,7 @@ public class CurrentPlanetActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (player.getWarped()) {
+        if (player.isWarped()) {
             final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
             builder.setTitle("Cannot move back");

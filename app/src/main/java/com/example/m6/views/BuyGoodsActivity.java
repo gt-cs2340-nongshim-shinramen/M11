@@ -21,7 +21,7 @@ import com.example.m6.viewmodels.c;
 
 public class BuyGoodsActivity extends AppCompatActivity implements BuyDialog.BuyDialogListener {
     Player player;
-    TextView waterPrice, furPrice, foodPrice, orePrice, firearmPrice, gamePrice, medicinePrice, machinePrice, narcorticsPrice, robotPrice;
+    TextView waterPrice, furPrice, foodPrice, orePrice, firearmPrice, gamePrice, medicinePrice, machinePrice,  narcorticsPrice, robotPrice;
     int water, fur, food, ore, firearm, game, medicine, machine, narcortics, robot;
     TextView credit, bay;
     Button buy_water, buy_furs, buy_food, buy_ore, buy_games, buy_firearms, buy_medicine, buy_machine, buy_narcortics, buy_robot;

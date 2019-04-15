@@ -1,12 +1,7 @@
 package com.example.m6.views;
 
-import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,15 +10,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.m6.R;
 import com.example.m6.model.Planet;
 import com.example.m6.model.Player;
 
+/**
+ *
+ */
+@SuppressWarnings("ALL")
 public class Warp extends AppCompatActivity {
-    private Button menuButton;
     private Player player;
-    WarpAdapter adapter;
+    // --Commented out by Inspection (4/4/2019 2:10 PM):WarpAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +33,7 @@ public class Warp extends AppCompatActivity {
         player = (Player)getIntent().getSerializableExtra("player");
 
         WarpAdapter adapter = new WarpAdapter(player);
-        initRecylerView(adapter);
+        initRecyclerView(adapter);
         adapter.setOnDestinationClickListener(new WarpAdapter.OnDestinationClickListener() {
             @Override
             public void onDestinationClicked(Planet planet, TextView rfuel) {
@@ -42,10 +41,10 @@ public class Warp extends AppCompatActivity {
                 Log.d("1111", rfuel.getText().toString());
                 player.setCurrentplanet(planet);
                 player.setFuel(player.getFuel()-fuel);
-                moveTonewPlanet();
+                moveToNewPlanet(player);
             }
         });
-        menuButton = findViewById(R.id.button_warp_menu);
+        Button menuButton = findViewById(R.id.button_warp_menu);
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,21 +56,30 @@ public class Warp extends AppCompatActivity {
 
         Log.d("player", player.getName());
     }
-    public void openMenu() {
+    private void openMenu() {
         Intent intent = new Intent(this, MenuActivity.class);
         intent.putExtra("player", player);
         startActivity(intent);
     }
-    public void moveTonewPlanet(){
-//        Intent intent = new Intent(this, CurrentPlanetActivity.class);
+    private void moveToNewPlanet(Player player){
+        boolean lottery = (Math.random() < 0.3);
+        if(lottery) {
+            player.setCredit(player.getCredit() + 1000);
+            Toast.makeText(getApplicationContext(),
+                    "Earned 1000 credit from Travel Lottery.",
+                    Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getApplicationContext(),
+                    "You could not get Lottery. Maybe next time", Toast.LENGTH_LONG).show();
+        }
+
+        Intent intent = new Intent(this, CurrentPlanetActivity.class);
         player.setWarped(true);
-        Intent intent = new Intent();
         intent.putExtra("player", player);
-        setResult(Activity.RESULT_OK, intent);
+        startActivity(intent);
         finish();
-//        startActivity(intent);
     }
-    private void initRecylerView(WarpAdapter adapter){
+    private void initRecyclerView(WarpAdapter adapter){
         RecyclerView recyclerView  = findViewById(R.id.warp_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);

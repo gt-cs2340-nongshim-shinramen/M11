@@ -15,6 +15,8 @@ public class Planet implements Serializable {
     private int resource;
     private Map<String, Integer> stock = new HashMap<>();
 
+
+    public Planet(){}
     public Planet(String name, int coordinateX, int coordinateY, int techLevel, int resource) {
         this(name, 0, coordinateX, coordinateY, techLevel, resource);
     }

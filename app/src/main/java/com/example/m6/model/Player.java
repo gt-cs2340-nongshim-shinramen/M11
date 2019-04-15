@@ -13,7 +13,6 @@ import java.util.Map;
 public class Player implements Serializable {
 
     private static final long serialVersionUID= 1L;
-    public static List<String> validDifficulty = Arrays.asList("Beginner", "Easy", "Normal", "Hard", "Impossible");
     private boolean warped = false;
     private String name, difficulty;
     private Spaceship spaceship;
@@ -23,14 +22,10 @@ public class Player implements Serializable {
     private Map<String, Integer> inven;
     private Universe system;
     private Planet currentplanet;
-    public static int findIndexofDifficulty(String difficulty) {
-        int i = 0;
-        while(i<4) {
-            if(difficulty.equals(validDifficulty.get(i))) {return i;}
-            i++;
-        }
-        return 0;
-    }
+
+
+    public Player(){}
+
     public Player(String name, int pilot, int fighter, int trader, int engineer, String difficulty, Universe universe, Map<String, Integer> map) {
         this.name = name;
         this.pilot = pilot;
@@ -49,21 +44,21 @@ public class Player implements Serializable {
         fuel = 80;
     }
 
-    public void setFuel(int fuel){
-        this.fuel = fuel;
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
-    public int getFuel(){return fuel;}
+
+    public boolean isWarped() {
+        return warped;
+    }
+
+    public void setWarped(boolean warped) {
+        this.warped = warped;
+    }
 
     public String getName() {
         return name;
     }
-
-    public Universe getUniverse(){return system;}
-
-    public void setCurrentplanet(Planet planet){
-        currentplanet = planet;
-    }
-    public Planet getCurrentplanet(){return currentplanet;}
 
     public void setName(String name) {
         this.name = name;
@@ -75,6 +70,14 @@ public class Player implements Serializable {
 
     public void setDifficulty(String difficulty) {
         this.difficulty = difficulty;
+    }
+
+    public Spaceship getSpaceship() {
+        return spaceship;
+    }
+
+    public void setSpaceship(Spaceship spaceship) {
+        this.spaceship = spaceship;
     }
 
     public int getPilot() {
@@ -117,37 +120,43 @@ public class Player implements Serializable {
         this.credit = credit;
     }
 
-    public Spaceship getSpaceship() {
-        return spaceship;
-    }
-
-    public void setSpaceship(Spaceship spaceship) {
-        this.spaceship = spaceship;
-    }
-
-    public int getCargo(){
-
+    public int getCargo() {
         return cargo;
     }
-    public void setCargo(int cargo){
+
+    public void setCargo(int cargo) {
         this.cargo = cargo;
     }
-    public Map<String, Integer> getInven(){
+
+    public int getFuel() {
+        return fuel;
+    }
+
+    public void setFuel(int fuel) {
+        this.fuel = fuel;
+    }
+
+    public Map<String, Integer> getInven() {
         return inven;
     }
 
-    public boolean getWarped() {
-        return warped;
+    public void setInven(Map<String, Integer> inven) {
+        this.inven = inven;
     }
 
-    public void setWarped(boolean warped) {
-        this.warped = warped;
+    public Universe getSystem() {
+        return system;
     }
 
-    public String toString(){
-        return String.format("Player %s has pilot point %d, Engineer point %d, Fighter point %d, Trader point %d with %s spaceship, $%d credit and difficulty : %s",
-                getName(), getPilot(), getEngineer(), getFighter(), getTrader(), getSpaceship(), getCredit(), getDifficulty());
+    public void setSystem(Universe system) {
+        this.system = system;
     }
 
+    public Planet getCurrentplanet() {
+        return currentplanet;
+    }
 
+    public void setCurrentplanet(Planet currentplanet) {
+        this.currentplanet = currentplanet;
+    }
 }

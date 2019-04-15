@@ -27,7 +27,7 @@ public class WarpAdapter extends RecyclerView.Adapter<WarpAdapter.WarpViewHolder
 
     public WarpAdapter(Player mplayer){
         player = mplayer;
-        planetList=player.getUniverse().getSystem();
+        planetList=player.getSystem().getSystem();
         validPlanet = c.validPlanet(player, planetList);
 //        for(SolarSystem e : validPlanet){
 //            Log.d("test", e.getPlanet().getName());

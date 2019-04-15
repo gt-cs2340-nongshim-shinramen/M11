@@ -17,8 +17,11 @@ import android.widget.Toast;
 import com.example.m6.R;
 import com.example.m6.model.Goods;
 import com.example.m6.model.Player;
+import com.example.m6.model.SolarSystem;
 import com.example.m6.model.Universe;
+import com.example.m6.model.nameList;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,7 +59,7 @@ public class ConfigurationActivity extends AppCompatActivity {
         remainingChange(edit_trader_point);
         remainingChange(edit_engineer_point);
 
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, R.layout.brand_dropdown, Player.validDifficulty);
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, R.layout.brand_dropdown, Arrays.asList("Beginner", "Easy", "Normal", "Hard", "Impossible"));
         spinnerArrayAdapter.setDropDownViewResource(R.layout.brand_dropdown);
         difficultySpinner.setAdapter(spinnerArrayAdapter);
 
@@ -85,7 +88,9 @@ public class ConfigurationActivity extends AppCompatActivity {
                 if (sum != 16) {
                     Toast.makeText(getApplicationContext(), "the sum of skill point should be 16", Toast.LENGTH_LONG).show();
                 } else {
-                    player = new Player(name, nPilot_point, nFighter_point, nTrader_point, nEngineer_point, difficulty, new Universe(), createMap());
+                    Universe universe = new Universe();
+                    createUniverse(universe);
+                    player = new Player(name, nPilot_point, nFighter_point, nTrader_point, nEngineer_point, difficulty, universe, createMap());
                     String showStat = "player "+player.getName()+" is successfully created";
                     Toast.makeText(getApplicationContext(), showStat, Toast.LENGTH_LONG).show();
                     Log.d("UniverseSystem", player.toString());
@@ -132,6 +137,23 @@ public class ConfigurationActivity extends AppCompatActivity {
         intent.putExtra("player", player);
         finish();
         startActivity(intent);
+    }
+    public void createUniverse(Universe universe){
+        for(nameList g : nameList.values()) {
+            universe.setX((int) (Math.random() * 150));
+            universe.setY((int) (Math.random() * 100));
+
+
+            boolean isSame = false;
+            for(SolarSystem e:universe.getSystem()){
+                if(e.getCoordinate_x()==universe.getX() && e.getCoordinate_y()==universe.getY()){
+                    isSame = true;
+                }
+            }
+            if (!isSame) {
+                universe.getSystem().add(new SolarSystem(g.toString(), universe.getX(), universe.getY(), (int) (Math.random() * 7), (int) (Math.random() * 12)));
+            }
+        }
     }
     public Map<String, Integer> createMap() {
         Map<String, Integer> myMap = new HashMap<>();

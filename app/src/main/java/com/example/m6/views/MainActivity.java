@@ -1,12 +1,20 @@
 package com.example.m6.views;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 import com.example.m6.R;
+import com.example.m6.model.Player;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,6 +29,15 @@ public class MainActivity extends AppCompatActivity {
                 makeConfig(v);
             }
         });
+
+        Button load_button = findViewById(R.id.main_load);
+        load_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadData();
+
+            }
+        });
     }
 
     /** Called when the user taps the Configuration button */
@@ -28,6 +45,25 @@ public class MainActivity extends AppCompatActivity {
         // Do something in response to button
         Intent intent = new Intent(this, ConfigurationActivity.class);
         startActivity(intent);
+    }
+    public void loadData(){
+        FirebaseDatabase.getInstance().getReference().addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Player player = dataSnapshot.child("players").getValue(Player.class);
+                openCurrentPlanet(player);
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+    public void openCurrentPlanet(Player player){
+        Intent intent = new Intent(this, CurrentPlanetActivity.class);
+        intent.putExtra("player", player);
+        startActivity(intent);
     }
 }
