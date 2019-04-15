@@ -17,12 +17,23 @@ import android.widget.Toast;
 import com.example.m6.R;
 import com.example.m6.model.Player;
 
-public class player_information extends AppCompatActivity implements refuelDialog.refuelDialogListener {
+/**
+ * player information class
+ */
+@SuppressWarnings({"FieldCanBeLocal", "ChainedMethodCall",
+        "ConstantConditions", "CyclicClassDependency"})
+public class player_information extends AppCompatActivity
+        implements refuelDialog.refuelDialogListener {
 
-    private TextView player_name, player_planet, player_credits, spaceship_fuel;
+    private TextView player_credits;
+    private TextView spaceship_fuel;
 
-    Button menu_button, marketplace_button, warp_button, refuel_button;
+    private Button menu_button;
+    private Button marketplace_button;
+    private Button warp_button;
+    private Button refuel_button;
     private Player player;
+    @SuppressWarnings("FeatureEnvy")
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +44,13 @@ public class player_information extends AppCompatActivity implements refuelDialo
 
         player = (Player)getIntent().getSerializableExtra("player");
         //this log checks whether player instance import successfully
-        Log.d("player", player.getName()+" is into MenuActivity sucessfully" );
+        Log.d("player", player.getName()+" is into MenuActivity successfully" );
 
-        player_name = findViewById(R.id.player_name);
+        TextView player_name = findViewById(R.id.player_name);
         player_name.setText(player.getName());
 
-        player_planet = findViewById(R.id.curr_planet);
+        TextView player_planet = findViewById(R.id.curr_planet);
+        //noinspection LawOfDemeter
         player_planet.setText(player.getCurrentplanet().getName());
 
         player_credits = findViewById(R.id.player_credits);
@@ -79,53 +91,36 @@ public class player_information extends AppCompatActivity implements refuelDialo
             }
         });
     }
-    public void refillFuel(){
+    private void refillFuel(){
         DialogFragment frag = new refuelDialog();
-
-//        Bundle bundle = new Bundle();
-//        bundle.putString("goodstype", goods);
-//        bundle.putInt("price", price);
-//        frag.setArguments(bundle);
-
 
         frag.show(getSupportFragmentManager(), "dialog");
     }
 
-
-//    public void buyItem(String fuel) {
-//        String input = fuel;
-//
-//        Log.d("1111", input);
-//        spaceship_fuel.setText(" L / 100 L");
-
-//        if(input <= 100-player.getFuel()) {
-//            player.setFuel(player.getFuel()+input);
-//            player.setCredit(player.getCredit()-input*1);
-//            spaceship_fuel.setText(player.getFuel()+ " L / 100 L");
-//        } else {
-//            Toast.makeText(getApplicationContext(), "you are trying to refill more than full tank", Toast.LENGTH_LONG).show();
-//        }
-//    }
-    public void openMenu() {
+    private void openMenu() {
         Intent intent = new Intent(this, MenuActivity.class);
         intent.putExtra("player", player);
-        Log.d("player", player.getName()+" sent from playerInformation to MenuActivity sucessfully" );
+        Log.d("player", player.getName()+
+                " sent from playerInformation to MenuActivity successfully" );
         startActivity(intent);
     }
-    public void openMarketPlace(){
+    private void openMarketPlace(){
         Intent intent = new Intent(this, Marketplace.class);
         intent.putExtra("player", player);
-        Log.d("player", player.getName()+" sent from playerInformationActivity to marketplaceActivity sucessfully" );
+        Log.d("player", player.getName()+
+                " sent from playerInformationActivity to marketplaceActivity successfully" );
         startActivity(intent);
     }
-    public void openWarp(){
+    private void openWarp(){
         Intent intent = new Intent(this, Warp.class);
         intent.putExtra("player", player);
+        //noinspection MagicNumber
         startActivityForResult(intent, 151);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        //noinspection MagicNumber
         if (requestCode == 151) {
             if(resultCode == Activity.RESULT_OK) {
                 player = (Player) data.getSerializableExtra("player");
@@ -138,19 +133,22 @@ public class player_information extends AppCompatActivity implements refuelDialo
         }
     }
 
+    @SuppressWarnings("FeatureEnvy")
     @SuppressLint("SetTextI18n")
     @Override
     public void buyFuel(String fuel) {
         int input = Integer.parseInt(fuel);
 
-        if(input <= 100-player.getFuel()) {
+        if(input <= (100 - player.getFuel())) {
             player.setFuel(player.getFuel()+input);
             int unitFuelPrice = 4;
-            player.setCredit(player.getCredit()-input*unitFuelPrice);
+            player.setCredit(player.getCredit() - (input * unitFuelPrice));
             spaceship_fuel.setText(player.getFuel()+ " L / 100 L");
             player_credits.setText(String.valueOf(player.getCredit()));
         } else {
-            Toast.makeText(getApplicationContext(), "you are trying to refill more than full tank", Toast.LENGTH_LONG).show();
+            //noinspection ChainedMethodCall
+            Toast.makeText(getApplicationContext(),
+                    "you are trying to refill more than full tank", Toast.LENGTH_LONG).show();
         }
     }
 }

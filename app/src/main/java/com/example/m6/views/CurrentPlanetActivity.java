@@ -1,14 +1,10 @@
 package com.example.m6.views;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -18,14 +14,12 @@ import com.example.m6.model.Player;
 import com.example.m6.model.Resource;
 import com.example.m6.model.TechLevel;
 
+@SuppressWarnings("ALL")
 public class CurrentPlanetActivity extends AppCompatActivity {
 
-    private Button menuButton;
-    private TextView name;
-    private TextView techLevel;
-    private TextView resource;
     private Player player;
 
+    @SuppressWarnings("FeatureEnvy")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,15 +30,15 @@ public class CurrentPlanetActivity extends AppCompatActivity {
 
 
         player = (Player) getIntent().getSerializableExtra("player");
-        Log.d("player", player.getName()+" is into CurrentPlanetActivity sucessfully" );
-        name = findViewById(R.id.system_name);
-        techLevel = findViewById(R.id.system_techLevel);
-        resource = findViewById(R.id.system_resource);
-        menuButton = findViewById(R.id.menu_button);
+        TextView name = findViewById(R.id.system_name);
+        TextView techLevel = findViewById(R.id.system_techLevel);
+        TextView resource = findViewById(R.id.system_resource);
+        Button menuButton = findViewById(R.id.menu_button);
 
 
         name.setText(player.getCurrentplanet().getName());
         techLevel.setText(TechLevel.values()[player.getCurrentplanet().getTechLevel()].toString());
+        //noinspection ChainedMethodCall
         resource.setText(Resource.values()[player.getCurrentplanet().getResource()].toString());
 
         menuButton.setOnClickListener(new View.OnClickListener() {
@@ -57,11 +51,10 @@ public class CurrentPlanetActivity extends AppCompatActivity {
 
     }
 
-    public void openMenu() {
+    private void openMenu() {
         player.setWarped(false);
         Intent intent = new Intent(this, MenuActivity.class);
         intent.putExtra("player", player);
-        Log.d("player", player.getName()+" sent from CurrentPlanetactivity to MenuActivity sucessfully" );
         startActivity(intent);
 
     }

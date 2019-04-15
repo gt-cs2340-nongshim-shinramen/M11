@@ -1,5 +1,8 @@
 package com.example.m6.model;
 
+/**
+ * list of planet names
+ */
 public enum nameList {
          Acamar,
          Adahn,        // The alternate personality for The Nameless One in Planescape: Torment

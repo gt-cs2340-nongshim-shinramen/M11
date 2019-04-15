@@ -1,5 +1,9 @@
 package com.example.m6.model;
 
+/**
+ * Goods list
+ */
+@SuppressWarnings({"ConstructorWithTooManyParameters", "CanBeFinal"})
 public enum Goods {
     WATER(0,0,2,30,3,4,"DROUGHT","LOSOFWATER","DESERT",30,50),
     FURS(0,0,0,250,10,10,"COLD","RICHFAUNA","LIFELESS",230,280),
@@ -41,34 +45,88 @@ public enum Goods {
         MTH = mth;
     }
 
+    /**
+     * get MTLP
+     * @return MTLP
+     */
     public int getMTLP() { return MTLP; }
+
+    /**
+     * get MTLU
+     * @return MTLU
+     */
     public int getMTLU() {
         return MTLU;
     }
+
+    /**
+     * getTTP
+     * @return TTP
+     */
     public int getTTP() {
         return TTP;
     }
+
+    /**
+     * get IPL
+     * @return IPL
+     */
     public int getIPL() {
         return IPL;
     }
+
+    /**
+     * Base Price
+     * @return base price
+     */
     public int getBasePrice() {
         return basePrice;
     }
+
+    /**
+     * get var
+     * @return var
+     */
     public int getVar() {
         return Var;
     }
+
+    /**
+     * get IE
+     * @return IE
+     */
     public String getIE() {
         return IE;
     }
+
+    /**
+     * get CR
+     * @return CR
+     */
     public String getCR() {
         return CR;
     }
+
+    /**
+     * getER
+     * @return ER
+     */
     public String getER() {
         return ER;
     }
+
+    /**
+     * get MTL
+     * @return MTL
+     */
     public int getMTL() {
         return MTL;
     }
+
+    /**
+     * get MTH
+     * @return MTH
+     */
     public int getMTH() {
         return MTH;
     }

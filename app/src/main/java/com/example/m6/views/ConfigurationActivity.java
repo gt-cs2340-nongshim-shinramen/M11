@@ -25,6 +25,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings({"LiteralAsArgToStringEquals", "ChainedMethodCall",
+        "JavaDoc", "CyclicClassDependency"})
 public class ConfigurationActivity extends AppCompatActivity {
 
     private EditText edit_name;
@@ -34,7 +36,6 @@ public class ConfigurationActivity extends AppCompatActivity {
     private EditText edit_engineer_point;
     private Spinner difficultySpinner;
 
-    private Button save;
     private Player player;
     private TextView remaining;
     private final int totalPoint = 16;
@@ -50,7 +51,7 @@ public class ConfigurationActivity extends AppCompatActivity {
         edit_trader_point = findViewById(R.id.trader_point_text);
         edit_engineer_point = findViewById(R.id.engineer_point_text);
         difficultySpinner = findViewById(R.id.difficulty_spinner);
-        save = findViewById(R.id.save_button);
+        Button save = findViewById(R.id.save_button);
 
 
         remaining = findViewById(R.id.remaining);
@@ -59,11 +60,15 @@ public class ConfigurationActivity extends AppCompatActivity {
         remainingChange(edit_trader_point);
         remainingChange(edit_engineer_point);
 
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, R.layout.brand_dropdown, Arrays.asList("Beginner", "Easy", "Normal", "Hard", "Impossible"));
+        @SuppressWarnings("Convert2Diamond") ArrayAdapter<String> spinnerArrayAdapter =
+                new ArrayAdapter<String>(
+                this, R.layout.brand_dropdown,
+                Arrays.asList("Beginner", "Easy", "Normal", "Hard", "Impossible"));
         spinnerArrayAdapter.setDropDownViewResource(R.layout.brand_dropdown);
         difficultySpinner.setAdapter(spinnerArrayAdapter);
 
         save.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
 
                 String name = edit_name.getText().toString();
@@ -73,8 +78,11 @@ public class ConfigurationActivity extends AppCompatActivity {
                 String sEngineer_point = edit_engineer_point.getText().toString();
 
 
-                if(name.trim().isEmpty()||sPilot_point.trim().isEmpty()||sFighter_point.trim().isEmpty()||sTrader_point.trim().isEmpty()||sEngineer_point.trim().isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "input field can not be blank", Toast.LENGTH_LONG).show();
+                if(name.trim().isEmpty()||sPilot_point.trim().isEmpty()
+                        ||sFighter_point.trim().isEmpty()||sTrader_point.trim().isEmpty()
+                        ||sEngineer_point.trim().isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "input field can not be blank",
+                            Toast.LENGTH_LONG).show();
                     return;
                 }
 
@@ -83,14 +91,18 @@ public class ConfigurationActivity extends AppCompatActivity {
                 int nTrader_point = Integer.parseInt(sTrader_point);
                 int nEngineer_point = Integer.parseInt(sEngineer_point);
                 int sum = nFighter_point + nPilot_point + nTrader_point + nEngineer_point;
-                String difficulty = difficultySpinner.getSelectedItem().toString();
+                @SuppressWarnings("ChainedMethodCall") String difficulty =
+                        difficultySpinner.getSelectedItem().toString();
 
+                //noinspection MagicNumber
                 if (sum != 16) {
-                    Toast.makeText(getApplicationContext(), "the sum of skill point should be 16", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),
+                            "the sum of skill point should be 16", Toast.LENGTH_LONG).show();
                 } else {
                     Universe universe = new Universe();
                     createUniverse(universe);
-                    player = new Player(name, nPilot_point, nFighter_point, nTrader_point, nEngineer_point, difficulty, universe, createMap());
+                    player = new Player(name, nPilot_point, nFighter_point, nTrader_point,
+                            nEngineer_point, difficulty, universe, createMap());
                     String showStat = "player "+player.getName()+" is successfully created";
                     Toast.makeText(getApplicationContext(), showStat, Toast.LENGTH_LONG).show();
                     Log.d("UniverseSystem", player.toString());
@@ -101,7 +113,7 @@ public class ConfigurationActivity extends AppCompatActivity {
             }
         });
     }
-    public void remainingChange(final EditText editText) {
+    private void remainingChange(final EditText editText) {
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -113,49 +125,62 @@ public class ConfigurationActivity extends AppCompatActivity {
 
             }
 
+            @SuppressWarnings("LiteralAsArgToStringEquals")
             @Override
             public void afterTextChanged(Editable s) {
                 if(!editText.getText().toString().equals("")){
-                    int pilot = (!edit_pilot_point.getText().toString().equals(""))? Integer.parseInt(edit_pilot_point.getText().toString()):0;
-                    int fighter = (!edit_fighter_point.getText().toString().equals(""))? Integer.parseInt(edit_fighter_point.getText().toString()):0;
-                    int trader = (!edit_trader_point.getText().toString().equals(""))? Integer.parseInt(edit_trader_point.getText().toString()):0;
-                    int engineer = (!edit_engineer_point.getText().toString().equals(""))? Integer.parseInt(edit_engineer_point.getText().toString()):0;
+                    @SuppressWarnings("LiteralAsArgToStringEquals") int pilot =
+                            (!edit_pilot_point.getText().toString().equals(""))?
+                            Integer.parseInt(edit_pilot_point.getText().toString()):0;
+                    @SuppressWarnings("ChainedMethodCall") int fighter =
+                            (!edit_fighter_point.getText().toString().equals(""))?
+                            Integer.parseInt(edit_fighter_point.getText().toString()):0;
+                    int trader = (!edit_trader_point.getText().toString().equals(""))?
+                            Integer.parseInt(edit_trader_point.getText().toString()):0;
+                    int engineer = (!edit_engineer_point.getText().toString().equals(""))?
+                            Integer.parseInt(edit_engineer_point.getText().toString()):0;
 
                     int currPoint= pilot+fighter+trader+engineer;
 
                     remaining.setText(String.valueOf(totalPoint-currPoint));
                 }
                 if(Integer.parseInt(remaining.getText().toString())<0){
-                    Toast.makeText(getApplicationContext(), "you can not assign more than 16 points", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),
+                            "you can not assign more than 16 points", Toast.LENGTH_LONG).show();
                 }
             }
         });
     }
     // open Next page which is Universe
-    public void openUniverse() {
+    private void openUniverse() {
         Intent intent = new Intent(this, player_information.class);
         intent.putExtra("player", player);
         finish();
         startActivity(intent);
     }
-    public void createUniverse(Universe universe){
+    @SuppressWarnings("FeatureEnvy")
+    private void createUniverse(Universe universe){
         for(nameList g : nameList.values()) {
+            //noinspection MagicNumber
             universe.setX((int) (Math.random() * 150));
             universe.setY((int) (Math.random() * 100));
 
 
             boolean isSame = false;
             for(SolarSystem e:universe.getSystem()){
-                if(e.getCoordinate_x()==universe.getX() && e.getCoordinate_y()==universe.getY()){
+                if((e.getCoordinate_x() == universe.getX()) &&
+                        (e.getCoordinate_y() == universe.getY())){
                     isSame = true;
                 }
             }
             if (!isSame) {
-                universe.getSystem().add(new SolarSystem(g.toString(), universe.getX(), universe.getY(), (int) (Math.random() * 7), (int) (Math.random() * 12)));
+                //noinspection MagicNumber
+                universe.getSystem().add(new SolarSystem(g.toString(), universe.getX(),
+                        universe.getY(), (int) (Math.random() * 7), (int) (Math.random() * 12)));
             }
         }
     }
-    public Map<String, Integer> createMap() {
+    private Map<String, Integer> createMap() {
         Map<String, Integer> myMap = new HashMap<>();
         for(Goods g: Goods.values()){
             myMap.put(g.toString().toLowerCase(), 0);

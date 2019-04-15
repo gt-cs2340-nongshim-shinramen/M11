@@ -14,8 +14,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.Map;
-
+@SuppressWarnings({"ChainedMethodCall", "JavaDoc", "CyclicClassDependency"})
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -25,8 +24,9 @@ public class MainActivity extends AppCompatActivity {
 
         final Button conf_button = findViewById(R.id.conf_button);
         conf_button.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
-                makeConfig(v);
+                makeConfig();
             }
         });
 
@@ -40,14 +40,16 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    /** Called when the user taps the Configuration button */
-    public void makeConfig(View view) {
+    /** Called when the user taps the Configuration button **/
+    public void makeConfig() {
         // Do something in response to button
         Intent intent = new Intent(this, ConfigurationActivity.class);
         startActivity(intent);
     }
-    public void loadData(){
-        FirebaseDatabase.getInstance().getReference().addListenerForSingleValueEvent(new ValueEventListener() {
+    private void loadData(){
+        //noinspection ChainedMethodCall
+        FirebaseDatabase.getInstance().getReference()
+                .addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Player player = dataSnapshot.child("players").getValue(Player.class);
@@ -61,7 +63,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-    public void openCurrentPlanet(Player player){
+    @SuppressWarnings("TypeMayBeWeakened")
+    private void openCurrentPlanet(Player player){
         Intent intent = new Intent(this, CurrentPlanetActivity.class);
         intent.putExtra("player", player);
         startActivity(intent);

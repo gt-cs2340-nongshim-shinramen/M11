@@ -16,24 +16,69 @@ import com.example.m6.R;
 import com.example.m6.model.Goods;
 import com.example.m6.model.Player;
 import com.example.m6.model.Resource;
+
+/**
+ * sell goods activity
+ */
+@SuppressWarnings({"MultipleVariablesInDeclaration", "FieldCanBeLocal", "ChainedMethodCall",
+        "LawOfDemeter", "ConstantConditions", "OverlyLongMethod", "OverlyComplexMethod",
+        "CyclicClassDependency"})
 public class SellGoodsActivity extends AppCompatActivity implements SellDialog.SellDialogListener {
-    Player player;
-    TextView waterPrice, furPrice, foodPrice, orePrice, firearmPrice, gamePrice, medicinePrice, machinePrice, narcorticsPrice, robotPrice;
-    int water, fur, food, ore, firearm, game, medicine, machine, narcortics, robot;
-    TextView credit, bay;
-    Button sell_water, sell_furs, sell_food, sell_ore, sell_firearms, sell_games, sell_medicine, sell_machines, sell_narcotics, sell_robots;
-    Button waterMax, furMax, foodMax, oreMax, firearmMax, gameMax, medicineMax, machineMax, narcorticsMax, robotMax;
-    String inputStr = "0";
-    Button menuButton;
+    private Player player;
+    private TextView waterPrice;
+    private TextView furPrice;
+    private TextView foodPrice;
+    private TextView orePrice;
+    private TextView firearmPrice;
+    private TextView gamePrice;
+    private TextView medicinePrice;
+    private TextView machinePrice;
+    private TextView narcorticsPrice;
+    private TextView robotPrice;
+    private int water;
+    private int fur;
+    private int food;
+    private int ore;
+    private int firearm;
+    private int game;
+    private int medicine;
+    private int machine;
+    private int narcortics;
+    private int robot;
+    private TextView credit;
+    private TextView bay;
+    private Button sell_water;
+    private Button sell_furs;
+    private Button sell_food;
+    private Button sell_ore;
+    private Button sell_firearms;
+    private Button sell_games;
+    private Button sell_medicine;
+    private Button sell_machines;
+    private Button sell_narcotics;
+    private Button sell_robots;
+    private Button waterMax;
+    private Button furMax;
+    private Button foodMax;
+    private Button oreMax;
+    private Button firearmMax;
+    private Button gameMax;
+    private Button medicineMax;
+    private Button machineMax;
+    private Button narcorticsMax;
+    private Button robotMax;
+    private String inputStr = "0";
+    private Button menuButton;
+    @SuppressWarnings("FeatureEnvy")
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sell_goods);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         player = (Player)getIntent().getSerializableExtra("player");
-        Log.d("player", player.getName()+" is into SellActivity sucessfully" );
+        Log.d("player", player.getName()+" is into SellActivity successfully" );
 
         menuButton = findViewById(R.id.sell_menu_button);
         menuButton.setOnClickListener(new View.OnClickListener() {
@@ -95,7 +140,8 @@ public class SellGoodsActivity extends AppCompatActivity implements SellDialog.S
 
 
     }
-    public void setupInverntory(){
+    @SuppressWarnings("FeatureEnvy")
+    private void setupInverntory(){
         sell_water.setText(String.valueOf(player.getInven().get("water".toLowerCase())));
         sell_furs.setText(String.valueOf(player.getInven().get("furs".toLowerCase())));
         sell_food.setText(String.valueOf(player.getInven().get("food".toLowerCase())));
@@ -107,8 +153,10 @@ public class SellGoodsActivity extends AppCompatActivity implements SellDialog.S
         sell_narcotics.setText(String.valueOf(player.getInven().get("narcotics".toLowerCase())));
         sell_robots.setText(String.valueOf(player.getInven().get("robots".toLowerCase())));
     }
-    public void clickMaxButton(Button button, final int price, final Goods goods) {
+    @SuppressWarnings("FeatureEnvy")
+    private void clickMaxButton(Button button, final int price, final Goods goods) {
         button.setOnClickListener(new View.OnClickListener() {
+            @SuppressWarnings("FeatureEnvy")
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
@@ -117,14 +165,18 @@ public class SellGoodsActivity extends AppCompatActivity implements SellDialog.S
                     if (max > 0) {
                         player.getInven().put(goods.toString().toLowerCase(), 0);
                         player.setCargo(player.getCargo() - max);
-                        player.setCredit(player.getCredit() + max * price);
-                        bay.setText(String.valueOf(player.getCargo()) + "/" + player.getSpaceship().getBay());
+                        player.setCredit(player.getCredit() + (max * price));
+                        bay.setText(String.valueOf(player.getCargo()) + "/"
+                                + player.getSpaceship().getBay());
                         credit.setText(String.valueOf(player.getCredit()) + " Cr");
                         setupInverntory();
 
-                        Toast.makeText(getApplicationContext(), "You sold " + max + " " + goods.toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "You sold " + max + " "
+                                + goods.toString(), Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(getApplicationContext(), "You can not sell anymore. Check your bay.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),
+                                "You can not sell anymore. Check your bay.",
+                                Toast.LENGTH_LONG).show();
                     }
                 } else {
                     openAlert();
@@ -132,7 +184,7 @@ public class SellGoodsActivity extends AppCompatActivity implements SellDialog.S
             }
         });
     }
-    public void clickNumButton(Button button, final int price, final Goods goods){
+    private void clickNumButton(Button button, final int price, final Goods goods){
         button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -144,10 +196,12 @@ public class SellGoodsActivity extends AppCompatActivity implements SellDialog.S
             }
         });
     }
-    public int calculatePrice(Goods goods){
+    @SuppressWarnings("FeatureEnvy")
+    private int calculatePrice(Goods goods){
         int resource = player.getCurrentplanet().getResource();
-        int price = goods.getBasePrice() + goods.getIPL()*(player.getCurrentplanet().getTechLevel() - goods.getMTLU());
-        boolean head = (Math.random() < 0.5);
+        int price = goods.getBasePrice() + (goods.getIPL()
+                * (player.getCurrentplanet().getTechLevel() - goods.getMTLU()));
+        @SuppressWarnings("MagicNumber") boolean head = (Math.random() < 0.5);
         if (head) {
             price +=goods.getBasePrice()*((int)(Math.random()*goods.getVar())/100);
         } else {
@@ -238,7 +292,7 @@ public class SellGoodsActivity extends AppCompatActivity implements SellDialog.S
         }
         return price;
     }
-    public void setupPrice() {
+    private void setupPrice() {
         String price;
         waterPrice = findViewById(R.id.sell_price_water);
         if (IsAble(Goods.WATER)){
@@ -322,14 +376,14 @@ public class SellGoodsActivity extends AppCompatActivity implements SellDialog.S
         }
         robotPrice.setText(price);
     }
-    boolean IsAble(Goods goods) {
-        return (player.getCurrentplanet().getTechLevel() - goods.getMTLU() < 0)? false : true;
+    private boolean IsAble(Goods goods) {
+        return (player.getCurrentplanet().getTechLevel() - goods.getMTLU()) >= 0;
     }
-    public void openAlert(){
+    private void openAlert(){
         AlertWindow alert = new AlertWindow();
         alert.show(getSupportFragmentManager(), "alert");
     }
-    public void openSell(String goods, int price) {
+    private void openSell(String goods, int price) {
         DialogFragment frag = new SellDialog();
         Bundle bundle = new Bundle();
         bundle.putString("goodstype", goods);
@@ -342,31 +396,37 @@ public class SellGoodsActivity extends AppCompatActivity implements SellDialog.S
         Toast.makeText(this, input+" items sold.", Toast.LENGTH_LONG).show();
         inputStr =(input);
     }
+    @SuppressWarnings("FeatureEnvy")
     @SuppressLint("SetTextI18n")
     @Override
     public void sellItem(String goods, int price) {
         //inputStr is input number as string value
-        int max = player.getInven().get(goods.toLowerCase());
-        if (max-Integer.parseInt(inputStr) >= 0) {
-            player.getInven().put(goods.toLowerCase(), player.getInven().get(goods.toLowerCase())-Integer.parseInt(inputStr));
+        @SuppressWarnings("ChainedMethodCall") int max = player.getInven().get(goods.toLowerCase());
+        if ((max - Integer.parseInt(inputStr)) >= 0) {
+            player.getInven().put(goods.toLowerCase(), player.getInven().get(goods.toLowerCase())
+                    -Integer.parseInt(inputStr));
             player.setCargo(player.getCargo() - Integer.parseInt(inputStr));
-            player.setCredit(player.getCredit() + Integer.parseInt(inputStr) * price);
+            player.setCredit(player.getCredit() + (Integer.parseInt(inputStr) * price));
             bay.setText(String.valueOf(player.getCargo()) + "/" + player.getSpaceship().getBay());
             credit.setText(String.valueOf(player.getCredit()) + " Cr");
             setupInverntory();
-            Toast.makeText(getApplicationContext(), "You sold " + inputStr + " " + goods, Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "You sold " + inputStr + " " + goods,
+                    Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(getApplicationContext(), "You can not sell anymore. Check your bay.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),
+                    "You can not sell anymore. Check your bay.", Toast.LENGTH_LONG).show();
         }
     }
-    public void openMenu() {
+    private void openMenu() {
         Intent intent = new Intent(this, MenuActivity.class);
         intent.putExtra("player", player);
-        Log.d("player", player.getName()+" sent from SellGoodsActivity to MenuActivity sucessfully" );
+        Log.d("player", player.getName()+
+                " sent from SellGoodsActivity to MenuActivity successfully" );
         finish();
         startActivity(intent);
     }
 
+    @Override
     public void onBackPressed() {
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -374,11 +434,13 @@ public class SellGoodsActivity extends AppCompatActivity implements SellDialog.S
         builder.setTitle("Discard or Not");
         builder.setMessage("Do you want to discard this? ");
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int id) {
                 finish();
             }
         });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int id) {
                 dialog.dismiss();
             }

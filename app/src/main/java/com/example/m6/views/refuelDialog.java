@@ -6,7 +6,6 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +14,7 @@ import android.widget.EditText;
 
 import com.example.m6.R;
 
+@SuppressWarnings("ALL")
 public class refuelDialog extends AppCompatDialogFragment {
     int fuel;
 
@@ -31,7 +31,7 @@ public class refuelDialog extends AppCompatDialogFragment {
         try{
             call = (refuelDialog.refuelDialogListener) activity;
         } catch(ClassCastException e) {
-            Log.d("test", "activity doesnt implement");
+            Log.d("test", "activity doesn't implement");
         }
     }
 
@@ -44,9 +44,9 @@ public class refuelDialog extends AppCompatDialogFragment {
 //        }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        LayoutInflater inflater = getActivity().getLayoutInflater();
+        @SuppressWarnings("ChainedMethodCall") LayoutInflater inflater = getActivity().getLayoutInflater();
         @SuppressLint("InflateParams") View view = inflater.inflate(R.layout.buy_dialog, null);
-        final EditText input = (EditText)view.findViewById(R.id.buy_input);
+        final EditText input = view.findViewById(R.id.buy_input);
         builder.setView(view)
                 .setTitle("Enter the amount of fuel")
                 .setNegativeButton("cancel", new DialogInterface.OnClickListener() {

@@ -1,5 +1,6 @@
 package com.example.m6.model;
 
+@SuppressWarnings("ALL")
 public enum Resource {
 
     NOSPECIALRESOURCES(0),
@@ -22,12 +23,14 @@ public enum Resource {
     WAR(17),
     PLAGUE(18),
     LACKOFWORKERS(19);
+    @SuppressWarnings("FieldMayBeFinal")
     private int code;
 
     Resource(int n) {
         code = n;
     }
 
+    @SuppressWarnings("JavaDoc")
     public int getNumber() {
         return code;
     }

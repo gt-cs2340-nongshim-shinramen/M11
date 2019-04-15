@@ -1,5 +1,8 @@
 package com.example.m6.model;
 
+/**
+ * tech level enum
+ */
 public enum TechLevel {
     PRE_AGRICULTURE(0),
     AGRICULTURE(1),
@@ -10,12 +13,22 @@ public enum TechLevel {
     POST_INDUSTRIAL(6),
     HI_TECH(7);
 
+    @SuppressWarnings({"FieldMayBeFinal", "CanBeFinal"})
     private int code;
 
+    /**
+     * tech level
+     * @param num tech level
+     */
     TechLevel(int num) {
         code = num;
     }
-    public int getnumber(){
+
+    /**
+     * get the number
+     * @return number of tech level
+     */
+    public int getNumber(){
         return code;
     }
 }
