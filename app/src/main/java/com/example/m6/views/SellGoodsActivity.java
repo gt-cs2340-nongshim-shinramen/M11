@@ -1,4 +1,5 @@
 package com.example.m6.views;
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ public class SellGoodsActivity extends AppCompatActivity implements SellDialog.S
     Button waterMax, furMax, foodMax, oreMax, firearmMax, gameMax, medicineMax, machineMax, narcorticsMax, robotMax;
     String inputStr = "0";
     Button menuButton;
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,6 +109,7 @@ public class SellGoodsActivity extends AppCompatActivity implements SellDialog.S
     }
     public void clickMaxButton(Button button, final int price, final Goods goods) {
         button.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
                 if(IsAble(goods)) {
@@ -339,6 +342,7 @@ public class SellGoodsActivity extends AppCompatActivity implements SellDialog.S
         Toast.makeText(this, input+" items sold.", Toast.LENGTH_LONG).show();
         inputStr =(input);
     }
+    @SuppressLint("SetTextI18n")
     @Override
     public void sellItem(String goods, int price) {
         //inputStr is input number as string value

@@ -1,5 +1,6 @@
 package com.example.m6.views;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ public class player_information extends AppCompatActivity implements refuelDialo
 
     Button menu_button, marketplace_button, warp_button, refuel_button;
     private Player player;
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -136,6 +138,7 @@ public class player_information extends AppCompatActivity implements refuelDialo
         }
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void buyFuel(String fuel) {
         int input = Integer.parseInt(fuel);

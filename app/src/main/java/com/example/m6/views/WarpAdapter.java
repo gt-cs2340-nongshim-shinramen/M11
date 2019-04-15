@@ -1,5 +1,6 @@
 package com.example.m6.views;
 
+import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -43,6 +44,7 @@ public class WarpAdapter extends RecyclerView.Adapter<WarpAdapter.WarpViewHolder
 
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull WarpViewHolder warpViewHolder, int i) {
         SolarSystem planets = validPlanet.get(i);

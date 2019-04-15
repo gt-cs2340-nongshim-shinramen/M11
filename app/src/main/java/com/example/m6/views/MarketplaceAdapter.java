@@ -1,5 +1,6 @@
 package com.example.m6.views;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -38,6 +39,7 @@ public class MarketplaceAdapter extends RecyclerView.Adapter<MarketplaceAdapter.
         return new MarketplaceViewHolder(itemView);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull MarketplaceViewHolder viewHolder, int i) {
 

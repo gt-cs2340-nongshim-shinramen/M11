@@ -1,5 +1,6 @@
 package com.example.m6.views;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ public class BuyGoodsActivity extends AppCompatActivity implements BuyDialog.Buy
     String inputStr = "0";
     Button menuButton;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,6 +130,7 @@ public class BuyGoodsActivity extends AppCompatActivity implements BuyDialog.Buy
     }
     public void clickMaxButton(Button button, final int price, final Goods goods) {
         button.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
                 if(IsAble(goods)) {
@@ -462,6 +465,7 @@ public class BuyGoodsActivity extends AppCompatActivity implements BuyDialog.Buy
         inputStr =(input);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void buyItem(String goods, int price) {
         int max = Math.min(Math.min(player.getSpaceship().getBay() - player.getCargo(), player.getCredit() / price), player.getCurrentplanet().getStock().get(goods.toLowerCase()));

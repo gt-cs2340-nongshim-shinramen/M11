@@ -1,5 +1,6 @@
 package com.example.m6.views;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -127,7 +128,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
 
 
     public void saveCurrentPlayerInstance() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss");
+        @SuppressLint("SimpleDateFormat") DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss");
         Date date = new Date();
         String currentTime = dateFormat.format(date);
 

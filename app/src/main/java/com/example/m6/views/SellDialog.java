@@ -1,4 +1,5 @@
 package com.example.m6.views;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -39,7 +40,7 @@ public class SellDialog extends AppCompatDialogFragment {
         }
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.buy_dialog, null);
+        @SuppressLint("InflateParams") View view = inflater.inflate(R.layout.buy_dialog, null);
         final EditText input = (EditText)view.findViewById(R.id.buy_input);
         builder.setView(view)
                 .setTitle("Enter the amount of items")
